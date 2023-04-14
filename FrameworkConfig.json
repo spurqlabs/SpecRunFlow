@@ -1,0 +1,44 @@
+{
+  "framework_mode": "Web", //framework_mode has three options 'Web' - to run selenium UI tests, 'App' - to run Appium mobile test, 'Web&API' - to run both web and API tests & 'API' - to run only API tests
+  "execution_mode": "Local", //Local - to execute tests locally, Cloud_Web to run tests on Browserstack, Cloud_Mobile to run tests on Browserstack mobile browser
+  "screenshot_mode": "Pass/Fail", //screenshot_mode has two options, 'Pass/Fail' to take screenshot for both passing and failing steps, 'Fail' to take screenshot of only failing step
+  "testrun_foldername": "TestRun_",
+  "testresults_output": "../TestResults/",
+  "accessibilityReport_foldername": "AccessibilityReport_",
+  "accessibility_output": "../AccessibilityTestResult/",
+
+  "driver_exe_path": "../Resources/DriverExe/",
+  "webdriver_explicit_wait": 120,
+  "browser": "Chrome",
+
+  "PageLoad_Mode": "OFF",
+  "ZAP_mode": "OFF",
+  "ZAP_host": "localhost",
+  "ZAP_port": "9090",
+  "ZAP_API_KEY": "un5d010ddt262k5db0u2rcv2qt",
+  "accessibilityTest_Mode": "OFF",
+
+
+  "os": "Windows",
+  "os_version": "8",
+  "browser_version": "72.0",
+  "resolution": "1280x1024",
+  "browserstack.local": "true",
+  "browserstack.selenium_version": "3.5.2",
+  "browserstack.user": "sandeepgarud3",
+  "browserstack.key": "KLpQp4xdgoc4by5u6RQa",
+  "browserstack.geoLocation": "US",
+  "device_os_version": "11",
+  "device": "iPad Mini 4",
+  "real_mobile": "true",
+  "cloud_hub_URL": "http://hub-cloud.browserstack.com/wd/hub/",
+
+  "appDeviceName": "MyPhone",
+  "appPlatformName": "Android",
+  "appPlatformVersion": "9",
+  "appUdid": "70b04979",
+  "appPackage": "com.android.vending",
+  "appActivity": "com.google.android.finsky.activities.MainActivity",
+  "appNoReset": "true",
+  "appNewCommandTimeout": 180
+}

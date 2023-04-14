@@ -1,0 +1,119 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+# resources:
+#   repositories:
+
+#   - repository: SpecRunFlow
+#     name: SpecRunFlow/SpecRunFlow
+#     type: git
+#     ref: master  
+    
+
+#   - repository: SpurMap 
+#     name: SpurMap/SpurMap
+#     endpoint: SpecRunFlowtoSpurMap
+#     type: git
+#     ref: main 
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- checkout: self
+# - task: UseDotNet@2
+#   inputs:
+#     version: '2.1.30'
+#     packageType: runtime
+
+# - script: dotnet restore SpecRunFlow.sln
+#   workingDirectory: $(Build.SourcesDirectory)/SpecRunFlow
+#   displayName: ' install dependancies'
+#   continueOnError: true
+
+# - script: dotnet build SpecRunFlow.sln
+#   workingDirectory: $(Build.SourcesDirectory)/SpecRunFlow
+#   displayName: ' build project'
+#   continueOnError: true
+  
+# - script: dotnet test -a:. -l:trx --filter TestCategory=smoke SpecRunFlow.sln
+#   workingDirectory: $(Build.SourcesDirectory)/SpecRunFlow
+#   displayName: ' run test cases'
+#   continueOnError: true 
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)/SpecRunFlow/TestResults/Report.json'
+#          artifactName: publish artifacts
+# - checkout: SpurMap 
+
+    
+# - script: npm i
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: ' npm i SpurMap'
+    
+# - script: type $(Build.SourcesDirectory)\SpecRunFlow\TestResults\Report.json > $(Build.SourcesDirectory)\SpurMap\RawData\Raw.json 
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: ' result json '
+       
+# - script: echo Cucumber>> $(Build.SourcesDirectory)\SpurMap\Choice.txt
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: 'write Cucumber '   
+   
+# - script: npm run getActualJsonMM
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: 'Actual Json '    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#       pathToPublish: '$(Build.SourcesDirectory)/SpurMap/RawData/Raw.json'
+#       artifactName: publish artifacts
+    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\CustomizeJson\Actual.json'
+#          artifactName: publish artifacts    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\MindMap\Actual.mm'
+#          artifactName: publish artifacts         
+      
+
+# - script: copy $(Build.SourcesDirectory)\SpecRunFlow\Features\*.feature $(Build.SourcesDirectory)\SpurMap\features\
+#   displayName: 'copy feature file'
+
+# - script: npm run getExpectedJsonMM
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: 'get expected '  
+
+# - script: npm run getMergedTwoJsonMM
+#   workingDirectory: $(Build.SourcesDirectory)/SpurMap/
+#   displayName: 'Merge '    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\CustomizeJson\Expected.json'
+#          artifactName: publish artifacts  
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\MindMap\Expected.mm'
+#          artifactName: publish artifacts    
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\MindMap\Mereged.mm'
+#          artifactName: publish artifacts 
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpurMap\CustomizeJson\Mereged.json'
+#          artifactName: publish artifacts           
+         
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#          pathToPublish: '$(Build.SourcesDirectory)\SpecRunFlow\TestResults'
+#          artifactName: publish artifacts     
+- bash: |
+    git push --prune https://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@github.com/SpurQLab/SpecRunFlow \
+        +refs/remotes/origin/master:refs/heads/master +refs/tags/*:refs/tags/*
+  displayName: 'Copy to Github'
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')

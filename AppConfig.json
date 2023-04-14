@@ -1,0 +1,9 @@
+{
+  "app_URL": "https://www.calculator.net/",
+  "api_URL": "https://localhost:44314/api",
+  "auth_URL": "https://stage-sharedservices.bsdApplication.com/api",
+  "ZAP_app_URL": "https://localhost:44314/api",
+  "user": "slc03_1@versionsolutions.com",
+  "password": "Welcome123",
+  "api_security_code": "QverZ2Lta4c7X8SMHF"
+}
